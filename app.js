@@ -19,16 +19,17 @@ const server = http.createServer((req, res) => {
       body.push(chunk);
     });
     //once done parsing data, res.on(end)
-    req.on('end', () => {
+    return req.on('end', () => {
       //take the text data, add to body and convert toString
       const parsedBody = Buffer.concat(body).toString();
       const message = parsedBody.split('=')[1]; //message=[0] value[1]
-      fs.writeFileSync('message.txt', message);
+      // writeFile async with graceful error handling optional
+      fs.writeFile('message.txt', message, (err) => {
+        res.statusCode = 302;
+        res.setHeader('Location', '/');
+        return res.end(); 
+      });
     });
-    res.statusCode = 302;
-    res.setHeader('Location', '/');
-    //return must be outside .on/.end to ensure async functionality does not skip over return
-    return res.end(); 
   }
   res.setHeader('Content-Type', 'text/html');
   res.write('<html>');
