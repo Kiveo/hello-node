@@ -39,4 +39,15 @@ const requestHandler = (req, res) => {
   res.end();
 };
 
+// Single export example
 module.exports = requestHandler;
+
+// could export multiples with an object format
+// module.exorts = {
+//   handler: requestHandler, 
+//   someText: 'Some text'
+// };
+
+// Can also export multiples as such: 
+exports.handler = requestHandler;
+// exports.someText = 'Some hard coded text';
