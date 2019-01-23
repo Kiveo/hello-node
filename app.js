@@ -27,7 +27,8 @@ const server = http.createServer((req, res) => {
     });
     res.statusCode = 302;
     res.setHeader('Location', '/');
-    return res.end();
+    //return must be outside .on/.end to ensure async functionality does not skip over return
+    return res.end(); 
   }
   res.setHeader('Content-Type', 'text/html');
   res.write('<html>');
