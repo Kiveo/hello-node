@@ -22,9 +22,9 @@ const server = http.createServer((req, res) => {
     req.on('end', () => {
       //take the text data, add to body and convert toString
       const parsedBody = Buffer.concat(body).toString();
-      console.log(parsedBody);
-    })
-    fs.writeFileSync('message.txt', 'Sample Text');
+      const message = parsedBody.split('=')[1]; //message=[0] value[1]
+      fs.writeFileSync('message.txt', message);
+    });
     res.statusCode = 302;
     res.setHeader('Location', '/');
     return res.end();
