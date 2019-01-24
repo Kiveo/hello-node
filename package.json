@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Kiveo/hello-node/issues"
   },
-  "homepage": "https://github.com/Kiveo/hello-node#readme"
+  "homepage": "https://github.com/Kiveo/hello-node#readme",
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  }
 }
